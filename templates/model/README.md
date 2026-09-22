@@ -8,9 +8,18 @@
 | Provider and client | [Provider, app or agent, and client version if available] |
 | Generated on | [YYYY-MM-DD, including time zone if recording a time] |
 | Shared inputs revision | [Full Git commit SHA containing the project prompt, assets, and any starter files] |
-| Settings and tools | [Reasoning mode, temperature, tool access, and other known settings] |
+| Model settings | [Reasoning mode, temperature, and other known settings] |
+| Available capabilities | [Enabled skills, tools, plugins or MCP servers, and relevant access permissions, as far as known] |
 | Additional instructions | [System or agent instructions under your control, or none; mark hidden instructions as unknown] |
 | Time and cost | [Recorded values with units and source, or not measured] |
+
+## Assistance used
+
+Record what was actually used, including automatically loaded skills. For each category, write `none` only when confirmed; otherwise use `unknown` for unavailable details.
+
+- Skills: [Name, source link or local path, version or commit if known, and the role each skill played.]
+- Tools and plugins: [Tools, plugins, and MCP servers actually used, with their purpose.]
+- Subagents: [Model IDs, assigned tasks, and relevant skills or tools used by delegated agents.]
 
 ## Run
 

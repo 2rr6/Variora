@@ -4,7 +4,7 @@ Different models, the same brief. A collection of demos built from shared prompt
 
 ## Projects
 
-Browse [projects](projects/). Add a link here for each comparison.
+- [Neon Serpent](projects/neon-serpent/): a first-person snake game set in a procedural, neon-lit Japanese city.
 
 ## Layout
 
@@ -48,5 +48,5 @@ Use lowercase, hyphenated directory names. Include the model version in its fold
 
 - Start each model in a fresh session with the same prompt, input assets, and starting files. Keep access to other implementations out of that session's workspace.
 - Commit the shared inputs before generation and record that commit in each model README. If the requirements change, start a new project comparison, such as `<project>-v2`.
-- Record the client, available tools, model settings, follow-up prompts, and human edits in the implementation record. Use `unknown` for unavailable details and `not measured` for unmeasured time or cost.
+- Record the client, model settings, skills, tools, subagents, follow-up prompts, and human edits in the implementation record. Distinguish available capabilities from those actually used. Use `unknown` for unavailable details and `not measured` for unmeasured time or cost.
 - Check every implementation against the acceptance criteria in the prompt. Link observations to screenshots or verification results, and distinguish measured results from personal impressions.
