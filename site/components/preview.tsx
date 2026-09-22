@@ -81,7 +81,7 @@ export function Preview({ locale }: { locale: Locale }) {
         <iframe
           key={version}
           src={model.preview}
-          title={`${project.title} — ${model.name}`}
+          title={`${project.title} - ${model.name}`}
           sandbox="allow-scripts allow-pointer-lock"
           allow="fullscreen; autoplay"
           referrerPolicy="no-referrer"

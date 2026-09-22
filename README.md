@@ -1,6 +1,6 @@
 # Variora
 
-Different models, the same brief — a collection of demos built from shared prompts, with source, screenshots, and notes.
+Different models, the same brief - a collection of demos built from shared prompts, with source, screenshots, and notes.
 
 [Explore the projects](https://variora.fog.moe) · [Website development](site/README.md)
 

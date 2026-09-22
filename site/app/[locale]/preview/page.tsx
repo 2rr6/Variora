@@ -11,7 +11,13 @@ export default async function PreviewPage({
   const { locale } = await params;
   return (
     <main id="content" className="wrap preview-page">
-      <Suspense fallback={<p>{messages[locale].loading}</p>}>
+      <Suspense
+        fallback={
+          <p className="preview-loading" role="status">
+            {messages[locale].loading}
+          </p>
+        }
+      >
         <Preview locale={locale} />
       </Suspense>
     </main>

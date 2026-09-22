@@ -24,7 +24,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  const title = "Variora — " + messages[locale].tagline;
+  const title = "Variora - " + messages[locale].tagline;
   const description = messages[locale].intro;
   return {
     metadataBase: new URL(siteUrl),

@@ -4,7 +4,7 @@ import { messages } from "@/lib/i18n";
 import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "Variora — " + messages.en.tagline,
+  title: "Variora - " + messages.en.tagline,
   description: messages.en.intro,
   icons: { icon: "/icon.svg" },
 };
