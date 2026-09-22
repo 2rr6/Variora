@@ -2,6 +2,8 @@
 
 Create a polished, original SVG illustration of a tiny Japanese ramen shop on a rainy night. The image should feel like an inviting miniature world and remain recognizable when reduced to a small square in a comparison grid.
 
+Follow the repository's [implementation workflow](../../AGENTS.md#implementation-workflow), from branch creation before implementation to delivery through a created PR.
+
 ## Scene
 
 Show the shop in a three-quarter view, with enough of its interior visible to establish depth. A cat chef leans through the serving window and hands a steaming bowl of ramen to a small robot customer standing outside. The robot holds a transparent umbrella in one hand and reaches for the bowl with the other. Make the serving gesture, characters, and their relationship immediately readable.
@@ -20,7 +22,7 @@ Keep the shop and two characters as the main subjects. Choose the composition, p
 
 ## Generation conditions
 
-You have one generation attempt and a maximum of 10 minutes from receipt of this prompt to final submission, including skill and tool use. Produce one final illustration. Do not render or visually preview your work before submission, generate alternative candidates, request feedback, or revise it based on visual feedback. Code inspection and nonvisual syntax validation are allowed.
+You have one generation attempt and a maximum of 10 minutes from receipt of this prompt to final artwork submission, including skill and tool use. Produce one final illustration. Do not render or visually preview your work before submission, generate alternative candidates, request feedback, or revise it based on visual feedback. Code inspection and nonvisual syntax validation are allowed. Freeze the artwork at submission; subsequent PR preparation must preserve that exact SVG.
 
 Skills, tools, plugins, and subagents may assist within these same constraints and the shared time budget. Record what was actually used, including automatically loaded skills. Keep other implementations outside your context.
 

@@ -1,5 +1,7 @@
 # [Demo title]
 
+Follow the repository's [implementation workflow](../../AGENTS.md#implementation-workflow), from branch creation before implementation to delivery through a created PR.
+
 ## Goal
 
 [Describe what to build and who will use it.]

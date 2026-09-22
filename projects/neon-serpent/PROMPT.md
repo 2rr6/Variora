@@ -4,6 +4,8 @@ Build a complete, playable first-person 3D snake game using Vite, TypeScript, an
 
 Create a finished small game with a coherent visual identity and satisfying controls. Make the remaining design decisions yourself within this brief.
 
+Follow the repository's [implementation workflow](../../AGENTS.md#implementation-workflow), from branch creation before implementation to delivery through a created PR.
+
 ## Gameplay
 
 - Use a first-person camera at the snake's head throughout active play. The snake moves forward automatically on a flat ground plane. It cannot fly or jump.
