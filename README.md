@@ -1,8 +1,19 @@
+<div align="center">
+
+<img src="site/public/icon.svg" alt="Variora" width="96" />
+
 # Variora
 
 Different models, the same brief - a collection of demos built from shared prompts, with source, screenshots, and notes.
 
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fvariora.fog.moe&style=flat-square&label=demo)](https://variora.fog.moe)
+[![Deploy](https://img.shields.io/github/actions/workflow/status/scarletkc/variora/pages.yml?branch=main&style=flat-square&label=deploy)](https://github.com/scarletkc/variora/actions/workflows/pages.yml)
+[![Last commit](https://img.shields.io/github/last-commit/scarletkc/variora?style=flat-square)](https://github.com/scarletkc/variora/commits/main)
+[![License](https://img.shields.io/badge/license-MIT-black?style=flat-square)](LICENSE)
+
 [Explore the projects](https://variora.fog.moe) · [Website development](site/README.md)
+
+</div>
 
 ## Projects
 
