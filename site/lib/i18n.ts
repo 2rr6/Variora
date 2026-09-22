@@ -43,7 +43,7 @@ const en = {
   reasoning: "Reasoning",
   provider: "Provider",
   harness: "Harness",
-  firstCommitted: "First committed",
+  firstCommitted: "Date added",
   author: "Author",
   unspecified: "Not specified",
   record: "Model record",
