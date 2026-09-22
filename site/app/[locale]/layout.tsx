@@ -30,7 +30,7 @@ export async function generateMetadata({
     metadataBase: new URL(siteUrl),
     title: {
       default: title,
-      template: "%s · Variora",
+      template: "%s - Variora",
     },
     description,
     openGraph: {

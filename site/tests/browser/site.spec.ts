@@ -23,8 +23,10 @@ for (const [locale, heading, lang] of [
     ).toBe(true);
     await page.locator('.project-art-link[href$="/neon-serpent/"]').click();
     await expect(page.locator("h1")).toHaveText("Neon Serpent");
+    await expect(page).toHaveTitle("Neon Serpent - Variora");
     await page.reload();
     await expect(page.locator("h1")).toHaveText("Neon Serpent");
+    await expect(page).toHaveTitle("Neon Serpent - Variora");
     expect(errors).toEqual([]);
   });
 }
@@ -73,12 +75,14 @@ test("language switching preserves project and preview selection", async ({
     .filter({ hasText: "E2E fixture" })
     .getByRole("link", { name: "プレビューを開く", exact: true })
     .click();
+  await expect(page).toHaveTitle("E2E fixture - Rainy Ramen - Variora");
   await page.getByLabel("言語").click();
   await page.getByRole("option", { name: "한국어" }).click();
   await expect(page).toHaveURL(
     /\/ko\/preview\/\?project=rainy-ramen&model=e2e-fixture/,
   );
   await expect(page.locator("h1")).toHaveText("E2E fixture");
+  await expect(page).toHaveTitle("E2E fixture - Rainy Ramen - Variora");
   await page.goto("/");
   await expect(page).toHaveURL(/\/ko\/$/);
 });
@@ -87,6 +91,7 @@ test("previews run module scripts, isolate parent access, and reload", async ({
   page,
 }) => {
   await page.goto("/en/preview/?project=rainy-ramen&model=e2e-fixture");
+  await expect(page).toHaveTitle("E2E fixture - Rainy Ramen - Variora");
   const frame = page.frameLocator("iframe");
   await expect(frame.getByText("Parent isolated")).toBeVisible();
   await frame.getByRole("button", { name: "Count: 0" }).click();
@@ -102,10 +107,12 @@ test("previews run module scripts, isolate parent access, and reload", async ({
     .click();
   await page.getByRole("link", { name: "Back to project" }).click();
   await expect(page.locator("h1")).toHaveText("Rainy Ramen");
+  await expect(page).toHaveTitle("Rainy Ramen - Variora");
 });
 
 test("invalid previews show a recoverable empty state", async ({ page }) => {
   await page.goto("/en/preview/?project=missing&model=missing");
+  await expect(page).toHaveTitle("Implementation preview - Variora");
   await expect(page.locator("iframe")).toHaveCount(0);
   await expect(
     page.getByRole("heading", { name: "This preview is unavailable." }),
@@ -116,7 +123,7 @@ test("invalid previews show a recoverable empty state", async ({ page }) => {
   await expect(page).toHaveURL(/\/en\/$/);
 });
 
-test("root selects browser language and 404 has working language links", async ({
+test("404 matches the entry layout and returns to the preferred language", async ({
   page,
 }) => {
   await page.addInitScript(() =>
@@ -124,8 +131,21 @@ test("root selects browser language and 404 has working language links", async (
   );
   await page.goto("/");
   await expect(page).toHaveURL(/\/ja\/$/);
+  await page.evaluate(() => localStorage.setItem("variora-theme", "dark"));
   const response = await page.goto("/missing-page/");
   expect(response?.status()).toBe(404);
-  await page.getByRole("link", { name: "中文" }).click();
+  await expect(page).toHaveTitle("Page not found - Variora");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(page.locator(".entry-page h1")).toHaveText("Variora");
+  await expect(page.locator(".entry-message")).toHaveText(
+    "404 - Page not found.",
+  );
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await page.evaluate(() => localStorage.setItem("variora-locale", "zh"));
+  await page.getByRole("link", { name: "Explore Variora" }).click();
   await expect(page).toHaveURL(/\/zh\/$/);
 });

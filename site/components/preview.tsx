@@ -16,6 +16,10 @@ export function Preview({ locale }: { locale: Locale }) {
   const [version, setVersion] = useState(0);
   const [full, setFull] = useState(false);
   const [error, setError] = useState("");
+  const title =
+    project && model?.preview
+      ? `${model.name} - ${project.title} - Variora`
+      : `${t.previewTitle} - Variora`;
   useEffect(() => {
     const changed = () => setFull(Boolean(document.fullscreenElement));
     document.addEventListener("fullscreenchange", changed);
@@ -24,6 +28,7 @@ export function Preview({ locale }: { locale: Locale }) {
   if (!project || !model?.preview)
     return (
       <div className="empty-state">
+        <title>{title}</title>
         <h1>{t.invalidPreview}</h1>
         <p>{t.invalidPreviewBody}</p>
         <Link className="button primary" href={`/${locale}/`}>
@@ -43,6 +48,7 @@ export function Preview({ locale }: { locale: Locale }) {
   }
   return (
     <>
+      <title>{title}</title>
       <Link className="back-link" href={`/${locale}/projects/${project.id}/`}>
         ← {t.returnProject}
       </Link>

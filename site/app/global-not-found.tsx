@@ -1,23 +1,24 @@
-import { localeNames, locales } from "@/lib/i18n";
+import { messages } from "@/lib/i18n";
+import { themeScript } from "@/components/shell";
+import { Arrow } from "@/components/icons";
 import "./globals.css";
 
 export default function NotFound() {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <title>Page not found · Variora</title>
+        <title>Page not found - Variora</title>
+        <link rel="icon" href="/icon.svg" />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
         <main className="entry-page">
-          <p className="eyebrow">VARIORA / 404</p>
-          <h1>Page not found.</h1>
-          <nav aria-label="Language">
-            {locales.map((locale) => (
-              <a className="button" key={locale} href={`/${locale}/`}>
-                {localeNames[locale]}
-              </a>
-            ))}
-          </nav>
+          <h1>Variora</h1>
+          <p className="entry-message">404 - {messages.en.pageNotFound}</p>
+          <a className="text-link" href="/">
+            {messages.en.goHome}
+            <Arrow />
+          </a>
         </main>
       </body>
     </html>

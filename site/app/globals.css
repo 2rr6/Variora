@@ -701,6 +701,9 @@ svg {
   font-size: 52px;
   letter-spacing: -2px;
 }
+.entry-message {
+  margin-bottom: 24px;
+}
 .entry-loader {
   width: 120px;
   height: 2px;
