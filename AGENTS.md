@@ -4,6 +4,8 @@
 
 When generating or revising a demo, do not read, search, copy, or reference another model's implementation code in this repository, including through Git history, tools, skills, or subagents.
 
+Do not use persistent memory, prior-session history, or notes from previous runs. Do not read from or write to memory files, services, or plugins, including through tools or subagents. Use only the current run's instructions and allowed inputs.
+
 ## Implementation workflow
 
 1. Before creating any implementation files or writing code, create and switch to a new branch for the project's model run, starting from the agreed shared-inputs commit. Give each model run its own branch, for example `feat/rainy-ramen/model-a-run-01`. Do not begin implementation on `main` or another model's branch. Use separate worktrees or checkouts for concurrent runs.
