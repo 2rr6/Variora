@@ -14,6 +14,8 @@ To add a project, use the [project template](templates/project/). Keep the share
 
 Follow the [model implementation rules](projects/AGENTS.md) and use the [model record template](templates/model/README.md). Place the implementation in `projects/<project>/models/<model>/app/` and link it from the project README.
 
+We prioritize submissions with higher confidence in their provenance and reproducibility. For the same project and model, a submission with more complete run details and parameters may replace an older, incomplete record. Please avoid duplicate submissions when the differences are minor. If you observe a significant difference, open an issue with the comparison and relevant run details.
+
 ### Keep comparisons controlled
 
 - Use the same shared prompt and starting inputs. Keep the harness, available tools, skills, resource limits, and other run conditions consistent where possible, so the model is the variable being compared.
