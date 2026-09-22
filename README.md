@@ -40,3 +40,7 @@ templates/
 ## Add a comparison
 
 Copy the [project template](templates/project/) into `projects/<project>/` and write a concise shared prompt. Each model follows the [repository rules](projects/AGENTS.md), keeps its implementation in `models/<model>/app/`, and uses the [model record template](templates/model/README.md) for its README. Link the results from the project README.
+
+## Contributing
+
+Issues and PRs are welcome, including prompt ideas and model implementations. Read the [contribution guidelines](CONTRIBUTING.md) for reproducibility and comparison requirements.
