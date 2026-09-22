@@ -9,7 +9,7 @@ Do not use persistent memory, prior-session history, or notes from previous runs
 ## Implementation workflow
 
 1. Before creating any implementation files or writing code, create and switch to a new branch for the model's implementation. Each model must use its own branch. Do not begin implementation on `main` or another model's branch.
-2. Implement the project prompt and fill in the [model record](templates/model/README.md).
+2. Implement the project prompt and fill in the [model record](../templates/model/README.md).
 3. Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages and PR titles.
 4. Commit and push the model's branch, then create a pull request targeting `main`. Leave the PR open for review.
 5. Present the created PR URL with a short summary of the result and checks performed.

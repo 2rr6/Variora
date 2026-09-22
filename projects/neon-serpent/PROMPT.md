@@ -4,4 +4,4 @@ Build a playable first-person 3D snake game using Three.js, set in a futuristic 
 
 Create visual and audio assets in code. Do not use external visual or audio assets or asset-generation services.
 
-Follow the [repository rules](../../AGENTS.md).
+Follow the [repository rules](../AGENTS.md).

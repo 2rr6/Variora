@@ -39,4 +39,4 @@ templates/
 
 ## Add a comparison
 
-Copy the [project template](templates/project/) into `projects/<project>/` and write a concise shared prompt. Each model follows the [repository rules](AGENTS.md), keeps its implementation in `models/<model>/app/`, and uses the [model record template](templates/model/README.md) for its README. Link the results from the project README.
+Copy the [project template](templates/project/) into `projects/<project>/` and write a concise shared prompt. Each model follows the [repository rules](projects/AGENTS.md), keeps its implementation in `models/<model>/app/`, and uses the [model record template](templates/model/README.md) for its README. Link the results from the project README.

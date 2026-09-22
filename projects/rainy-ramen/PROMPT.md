@@ -4,4 +4,4 @@ Create an SVG illustration of a cat serving ramen to a small robot holding a tra
 
 Create visual and audio assets in code. Do not use external visual or audio assets or asset-generation services.
 
-Follow the [repository rules](../../AGENTS.md).
+Follow the [repository rules](../AGENTS.md).
