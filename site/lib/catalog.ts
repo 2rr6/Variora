@@ -5,6 +5,7 @@ export type Model = {
   id: string;
   name: string;
   provider: string;
+  reasoning: string;
   harness: string;
   firstCommittedAt: string | null;
   author: { name: string; login: string | null } | null;

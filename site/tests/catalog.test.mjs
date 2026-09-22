@@ -40,7 +40,7 @@ test("copies relative assets, parses model records, and excludes local config", 
   const f = await fixture(t, {
     ...base,
     "projects/example/models/demo/README.md":
-      "# Demo\n| Model | **model-1** |\n| Provider | [Vendor](https://example.com) |\n| Harness | CLI |",
+      "# Demo\n| Model | **model-1** |\n| Provider | [Vendor](https://example.com) |\n| Reasoning effort | `Max` |\n| Harness | CLI |",
     "projects/example/models/demo/app/index.html":
       '<script src="assets/main.js"></script>',
     "projects/example/models/demo/app/assets/main.js": "console.log('works')",
@@ -53,6 +53,7 @@ test("copies relative assets, parses model records, and excludes local config", 
     id: "demo",
     name: "model-1",
     provider: "Vendor",
+    reasoning: "Max",
     harness: "CLI",
     firstCommittedAt: null,
     author: null,
@@ -81,6 +82,7 @@ test("keeps source-only models visible when no static entry exists", async (t) =
   const [project] = await buildCatalog(f.projects, f.public);
   assert.equal(project.models[0].name, "Source model");
   assert.equal(project.models[0].preview, null);
+  assert.equal(project.models[0].reasoning, "");
 });
 test("supports an explicit prebuilt directory and nested entry", async (t) => {
   const f = await fixture(t, {

@@ -3,6 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Model | [Exact model ID] |
+| Reasoning effort | [Configured reasoning level, if applicable] |
 | Provider | [Service provider or local backend] |
 | Harness | [Agent or application name and version] |
 

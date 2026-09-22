@@ -188,6 +188,7 @@ export async function buildCatalog(projectsRoot, publicRoot) {
           field(record, "Model") ||
           clean(record.match(/^#\s+(.+)$/m)?.[1] ?? modelId),
         provider: field(record, "Provider"),
+        reasoning: field(record, "Reasoning effort"),
         harness: field(record, "Harness"),
         ...(await provenance(modelRoot)),
         preview,

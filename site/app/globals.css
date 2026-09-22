@@ -574,19 +574,6 @@ svg {
   padding: 27px;
   min-width: 0;
 }
-.model-topline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
-  gap: 15px;
-}
-.model-status {
-  font-size: 10px;
-  padding: 3px 8px;
-  background: var(--soft);
-  border-radius: var(--radius-sm);
-}
 .model-card h3 {
   font-size: 22px;
   overflow-wrap: anywhere;

@@ -40,7 +40,7 @@ const en = {
   emptyBody:
     "Implementations will appear here when they are added to the project. In the meantime, take a look at the shared prompt.",
   preview: "Open preview",
-  noPreview: "Source available",
+  reasoning: "Reasoning",
   provider: "Provider",
   harness: "Harness",
   firstCommitted: "First committed",
@@ -95,7 +95,7 @@ export const messages: Record<Locale, Messages> = {
     emptyTitle: "等待第一份诠释。",
     emptyBody: "实现加入项目后会显示在这里。你可以先看看这个项目的共同提示词。",
     preview: "打开预览",
-    noPreview: "可查看源码",
+    reasoning: "推理强度",
     provider: "提供商",
     harness: "运行工具",
     firstCommitted: "首次提交",
@@ -146,7 +146,7 @@ export const messages: Record<Locale, Messages> = {
     emptyBody:
       "実装がプロジェクトに追加されると、ここに表示されます。まずは共通のプロンプトをご覧ください。",
     preview: "プレビューを開く",
-    noPreview: "ソースを公開中",
+    reasoning: "推論強度",
     provider: "プロバイダー",
     harness: "実行ツール",
     firstCommitted: "初回コミット",
@@ -197,7 +197,7 @@ export const messages: Record<Locale, Messages> = {
     emptyBody:
       "프로젝트에 구현이 추가되면 여기에 표시됩니다. 먼저 공통 프롬프트를 살펴보세요.",
     preview: "미리보기 열기",
-    noPreview: "소스 공개",
+    reasoning: "추론 강도",
     provider: "제공업체",
     harness: "실행 도구",
     firstCommitted: "최초 커밋",

@@ -113,16 +113,15 @@ export default async function ProjectPage({
           <div className="model-grid">
             {project.models.map((model) => (
               <article key={model.id} className="model-card">
-                <div className="model-topline">
-                  <span className="model-status">
-                    {model.preview ? t.preview : t.noPreview}
-                  </span>
-                </div>
                 <h3>{model.name}</h3>
                 <dl>
                   <div>
                     <dt>{t.provider}</dt>
                     <dd>{model.provider || t.unspecified}</dd>
+                  </div>
+                  <div>
+                    <dt>{t.reasoning}</dt>
+                    <dd>{model.reasoning || t.unspecified}</dd>
                   </div>
                   <div>
                     <dt>{t.harness}</dt>
