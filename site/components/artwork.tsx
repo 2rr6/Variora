@@ -80,21 +80,3 @@ export function Artwork({ id }: { id: string }) {
     </div>
   );
 }
-
-export function HeroArtwork() {
-  return (
-    <div className="hero-art" aria-hidden="true">
-      <div className="hero-axis horizontal" />
-      <div className="hero-axis vertical" />
-      <div className="orbit-art">
-        <i />
-        <i />
-        <i />
-        <i />
-      </div>
-      <span className="coordinate top">SAME INPUT</span>
-      <span className="coordinate bottom">∞ OUTCOMES</span>
-      <span className="orbital-dot" />
-    </div>
-  );
-}

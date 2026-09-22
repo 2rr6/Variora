@@ -24,41 +24,12 @@ export function Gallery({ locale }: { locale: Locale }) {
         .includes(search.trim().toLocaleLowerCase(locale)),
   );
   return (
-    <section
-      id="projects"
-      className="collection wrap"
-      aria-labelledby="collection-title"
-    >
-      <div className="section-heading">
-        <div>
-          <p className="eyebrow">{t.collection}</p>
-          <h2 id="collection-title">{t.collectionTitle}</h2>
-        </div>
-        <p>{t.collectionIntro}</p>
-      </div>
+    <section id="projects" className="collection wrap" aria-label={t.projects}>
       <div className="filters">
-        <div className="filter-tabs" aria-label={t.collection}>
-          <button
-            aria-pressed={filter === "all"}
-            onClick={() => setFilter("all")}
-          >
-            {t.all}
-            <span>{projects.length}</span>
-          </button>
-          {categories.map((category) => (
-            <button
-              key={category}
-              aria-pressed={filter === category}
-              onClick={() => setFilter(category)}
-            >
-              {categoryName(category)}
-            </button>
-          ))}
-        </div>
         <label className="search">
           <svg
-            width="17"
-            height="17"
+            width="15"
+            height="15"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -76,9 +47,27 @@ export function Gallery({ locale }: { locale: Locale }) {
             placeholder={t.search}
           />
         </label>
+        <div className="filter-tabs" aria-label={t.projects}>
+          <button
+            aria-pressed={filter === "all"}
+            onClick={() => setFilter("all")}
+          >
+            {t.all}
+            <span>{projects.length}</span>
+          </button>
+          {categories.map((category) => (
+            <button
+              key={category}
+              aria-pressed={filter === category}
+              onClick={() => setFilter(category)}
+            >
+              {categoryName(category)}
+            </button>
+          ))}
+        </div>
       </div>
       <div className="project-grid">
-        {filtered.map((project, index) => (
+        {filtered.map((project) => (
           <article className="project-card" key={project.id}>
             <Link
               className="project-art-link"
@@ -92,10 +81,7 @@ export function Gallery({ locale }: { locale: Locale }) {
               </span>
             </Link>
             <div className="project-meta">
-              <span>
-                {String(index + 1).padStart(2, "0")} /{" "}
-                {categoryName(project.category)}
-              </span>
+              <span>{categoryName(project.category)}</span>
               <span>
                 {project.models.length
                   ? `${project.models.length} ${t.modelCount}`

@@ -20,7 +20,7 @@ export async function generateMetadata({
   return {
     metadataBase: new URL(siteUrl),
     title: {
-      default: "Variora — " + messages[locale].footer,
+      default: "Variora — " + messages[locale].tagline,
       template: "%s · Variora",
     },
     description: messages[locale].intro,

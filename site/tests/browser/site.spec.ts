@@ -2,10 +2,10 @@ import { test, expect } from "@playwright/test";
 import catalog from "../../.generated/catalog.json";
 
 for (const [locale, heading, lang] of [
-  ["en", "One prompt.", "en"],
-  ["zh", "同一个起点。", "zh-Hans"],
-  ["ja", "ひとつのお題。", "ja"],
-  ["ko", "하나의 프롬프트.", "ko"],
+  ["en", "Projects", "en"],
+  ["zh", "项目", "zh-Hans"],
+  ["ja", "プロジェクト", "ja"],
+  ["ko", "프로젝트", "ko"],
 ]) {
   test(`${locale} renders localized static pages without overflow`, async ({
     page,
@@ -50,10 +50,12 @@ test("theme follows the system and persists an explicit preference", async ({
   await page.emulateMedia({ colorScheme: "dark" });
   await page.goto("/en/");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await page.getByLabel("Appearance").selectOption("light");
+  await page.getByLabel("Appearance").click();
+  await page.getByRole("option", { name: "Light" }).click();
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  await page.getByLabel("Appearance").selectOption("system");
+  await page.getByLabel("Appearance").click();
+  await page.getByRole("option", { name: "System" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   await page.emulateMedia({ colorScheme: "light" });
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
@@ -63,14 +65,16 @@ test("language switching preserves project and preview selection", async ({
   page,
 }) => {
   await page.goto("/en/projects/rainy-ramen/");
-  await page.getByLabel("Language").selectOption("ja");
+  await page.getByLabel("Language").click();
+  await page.getByRole("option", { name: "日本語" }).click();
   await expect(page).toHaveURL(/\/ja\/projects\/rainy-ramen\//);
   await page
     .locator(".model-card")
     .filter({ hasText: "E2E fixture" })
     .getByRole("link", { name: "プレビューを開く", exact: true })
     .click();
-  await page.getByLabel("言語").selectOption("ko");
+  await page.getByLabel("言語").click();
+  await page.getByRole("option", { name: "한국어" }).click();
   await expect(page).toHaveURL(
     /\/ko\/preview\/\?project=rainy-ramen&model=e2e-fixture/,
   );

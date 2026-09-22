@@ -52,7 +52,6 @@ export function Preview({ locale }: { locale: Locale }) {
             {project.title} / {t.previewTitle}
           </p>
           <h1>{model.name}</h1>
-          <p>{t.previewHelp}</p>
         </div>
         <a
           className="text-link"

@@ -5,12 +5,7 @@ const languageScript = `(()=>{let l;try{l=localStorage.getItem('variora-locale')
 export default function Entry() {
   return (
     <main className="entry-page">
-      <p className="eyebrow">VARIORA</p>
-      <h1>
-        One prompt.
-        <br />
-        Many possibilities.
-      </h1>
+      <h1>Variora</h1>
       <nav aria-label="Language">
         {locales.map((locale) => (
           <Link className="button" key={locale} href={`/${locale}/`}>

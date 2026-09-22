@@ -81,18 +81,12 @@ export default async function ProjectPage({
       </section>
       <section className="implementations">
         <div className="section-heading">
-          <div>
-            <p className="eyebrow">
-              {String(project.models.length).padStart(2, "0")} / {t.modelCount}
-            </p>
-            <h2>{t.implementations}</h2>
-          </div>
-          <p>{t.implementationsIntro}</p>
+          <h2>{t.implementations}</h2>
         </div>
         {project.models.length === 0 ? (
           <div className="empty-state">
             <span className="empty-orbit" aria-hidden="true">
-              ↗
+              <Arrow diagonal />
             </span>
             <h3>{t.emptyTitle}</h3>
             <p>{t.emptyBody}</p>
@@ -108,14 +102,11 @@ export default async function ProjectPage({
           </div>
         ) : (
           <div className="model-grid">
-            {project.models.map((model, index) => (
+            {project.models.map((model) => (
               <article key={model.id} className="model-card">
                 <div className="model-topline">
-                  <span className="mono">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
                   <span className="model-status">
-                    {model.preview ? t.previewTitle : t.noPreview}
+                    {model.preview ? t.preview : t.noPreview}
                   </span>
                 </div>
                 <h3>{model.name}</h3>
