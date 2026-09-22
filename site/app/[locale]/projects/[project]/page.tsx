@@ -24,9 +24,12 @@ export async function generateMetadata({
     description: summary(project, locale),
     alternates: {
       canonical: `/${locale}/projects/${id}/`,
-      languages: Object.fromEntries(
-        locales.map((key) => [key, `/${key}/projects/${id}/`]),
-      ),
+      languages: {
+        ...Object.fromEntries(
+          locales.map((key) => [key, `/${key}/projects/${id}/`]),
+        ),
+        "x-default": `/en/projects/${id}/`,
+      },
     },
   };
 }
