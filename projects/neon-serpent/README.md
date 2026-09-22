@@ -15,4 +15,4 @@ Browse [models](models/). Start each implementation from the [model record templ
 
 ## Comparison
 
-Use the acceptance criterion IDs in the prompt when recording results. Compare gameplay correctness, visual composition, control feel, and performance, with evidence in each implementation's README. Interpret each result alongside its recorded client, skills, tools, and subagent use.
+Use the acceptance criterion IDs in the prompt when recording results. Compare gameplay correctness, visual composition, control feel, and performance, with evidence in each implementation's README. Interpret each result alongside its recorded provider, harness, skills, tools, and subagent use.

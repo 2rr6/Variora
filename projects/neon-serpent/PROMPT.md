@@ -80,7 +80,7 @@ Skills, plugins, tools, and subagents may assist with the task within the restri
 In your assigned implementation directory, provide:
 
 - `app/`: the complete runnable application, including a lockfile and an application README with setup, controls, and build instructions.
-- `README.md`: the generation record, model identifier as exposed by your environment, known settings, prompt revision, verification results, known issues, and any follow-up instructions or manual edits. Record unavailable information as `unknown` and unmeasured values as `not measured`.
+- `README.md`: the generation record, model identifier as exposed by your environment, provider, harness name and version, known settings, prompt revision, verification results, known issues, and any follow-up instructions or manual edits. Record the model provider separately from the harness: the provider serves the model, while the harness is the coding agent or application orchestrating the run, such as Codex CLI, Codex desktop, Claude Code, or Cursor. Record unavailable information as `unknown` and unmeasured values as `not measured`.
 - `screenshots/`: actual captures of the title screen, active first-person gameplay, and a game-over or completion screen, if browser capture is available. Include at least one gameplay capture with the snake's body visible. Record the viewport used. Do not fabricate screenshots or test results.
 
 ## Acceptance criteria
@@ -101,4 +101,4 @@ Verify the following and record the observed result for each ID. Mark anything y
 | A10 | The city visibly includes the requested Japanese and futuristic details, and neon effects preserve gameplay visibility. |
 | A11 | All assets comply with the procedural-content restrictions, and runtime network inspection shows no external requests. |
 | A12 | Record performance during active play and report any browser console errors or unverified technical requirements. |
-| A13 | The generation record distinguishes available and used capabilities, and identifies loaded skills, tools, plugins, and any subagents with their roles. |
+| A13 | The generation record identifies the model, provider, and harness with its version; distinguishes available and used capabilities; and identifies loaded skills, tools, plugins, and any subagents with their roles. |

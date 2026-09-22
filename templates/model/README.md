@@ -5,7 +5,8 @@
 | Field | Value |
 | --- | --- |
 | Model | [Exact model ID or label exposed by the provider] |
-| Provider and client | [Provider, app or agent, and client version if available] |
+| Provider | [Service provider or local inference backend serving the model] |
+| Harness | [Coding agent or application orchestrating the run, such as Codex CLI, Codex desktop, Claude Code, or Cursor; include its version when available] |
 | Generated on | [YYYY-MM-DD, including time zone if recording a time] |
 | Shared inputs revision | [Full Git commit SHA containing the project prompt, assets, and any starter files] |
 | Model settings | [Reasoning mode, temperature, and other known settings] |
