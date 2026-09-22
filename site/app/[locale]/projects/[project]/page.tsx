@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { projects, projectSource, modelSource, summary } from "@/lib/catalog";
+import {
+  projects,
+  projectSource,
+  modelSource,
+  summary,
+  repository,
+} from "@/lib/catalog";
 import { locales, messages, type Locale } from "@/lib/i18n";
 import { Artwork } from "@/components/artwork";
 import { Arrow } from "@/components/icons";
@@ -121,6 +127,40 @@ export default async function ProjectPage({
                   <div>
                     <dt>{t.harness}</dt>
                     <dd>{model.harness || t.unspecified}</dd>
+                  </div>
+                  <div>
+                    <dt>{t.firstCommitted}</dt>
+                    <dd>
+                      {model.firstCommittedAt && model.commit ? (
+                        <a
+                          href={`${repository}/commit/${model.commit}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <time dateTime={model.firstCommittedAt}>
+                            {model.firstCommittedAt.slice(0, 10)}
+                          </time>
+                        </a>
+                      ) : (
+                        t.unspecified
+                      )}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>{t.author}</dt>
+                    <dd>
+                      {model.author?.login ? (
+                        <a
+                          href={`https://github.com/${model.author.login}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          @{model.author.login}
+                        </a>
+                      ) : (
+                        model.author?.name || t.unspecified
+                      )}
+                    </dd>
                   </div>
                 </dl>
                 <div className="model-actions">

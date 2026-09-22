@@ -6,6 +6,9 @@ export type Model = {
   name: string;
   provider: string;
   harness: string;
+  firstCommittedAt: string | null;
+  author: { name: string; login: string | null } | null;
+  commit: string | null;
   preview: string | null;
 };
 export type Project = {

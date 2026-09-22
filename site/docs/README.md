@@ -56,4 +56,9 @@ the URL hash on purpose — preserving it caused a scroll-to-bottom bug.
 ## Content
 
 Projects/models come from `scripts/catalog.mjs` scanning the project
-directories; `npm run check`/build regenerates `lib/catalog.ts`.
+directories; `npm run check`/build regenerates `.generated/catalog.json`, consumed
+by `lib/catalog.ts`.
+
+Model dates and authors come from Git history via
+[`createProvenanceReader`](../scripts/provenance.mjs). Use a full clone for
+provenance; `GITHUB_TOKEN` enables authenticated GitHub author lookups.

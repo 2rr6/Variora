@@ -10,6 +10,7 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createProvenanceReader } from "./provenance.mjs";
 
 const siteRoot = fileURLToPath(new URL("..", import.meta.url));
 const extensions = new Set([
@@ -132,6 +133,7 @@ async function copyAssets(source, destination) {
 }
 
 export async function buildCatalog(projectsRoot, publicRoot) {
+  const provenance = createProvenanceReader();
   const previewsRoot = path.join(publicRoot, "previews");
   // Only this generated directory is replaced; project sources are never modified.
   await rm(previewsRoot, { recursive: true, force: true });
@@ -187,6 +189,7 @@ export async function buildCatalog(projectsRoot, publicRoot) {
           clean(record.match(/^#\s+(.+)$/m)?.[1] ?? modelId),
         provider: field(record, "Provider"),
         harness: field(record, "Harness"),
+        ...(await provenance(modelRoot)),
         preview,
       });
     }

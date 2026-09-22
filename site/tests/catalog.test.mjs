@@ -54,6 +54,9 @@ test("copies relative assets, parses model records, and excludes local config", 
     name: "model-1",
     provider: "Vendor",
     harness: "CLI",
+    firstCommittedAt: null,
+    author: null,
+    commit: null,
     preview: "/previews/example/demo/index.html",
   });
   assert.match(
