@@ -24,3 +24,9 @@ Open [`app/index.html`](app/index.html) in a modern browser. The page has no bui
 - One implementation attempt. After visual inspection, the cloud animation groups were adjusted so their motion retains their SVG positions. The user supplied the model and reasoning effort, and clarified the provider; no other model or human creative edits were used.
 - Checks performed: rendered `app/index.html` locally with headless Chrome at a 1440 × 900 viewport, then rerendered and inspected the scene after the cloud adjustment. The page and initial SVG scene rendered without a visible failure. Git's staged whitespace check passed for the three result files. No test suite was run, as the shared prompt does not require testing.
 - Known limitations: animation requires JavaScript; without it, the SVG remains in a static pose. Other browsers and viewport sizes were not inspected.
+
+## Supplemental provenance
+
+- The separate Codex conversation that prepared this run supplied procedural instructions only: use a fresh independent task, avoid other model outputs and persistent memory, write to the designated model directory, complete the model record, and stop after a local commit for user review. It provided no animation design or implementation code.
+- Launch settings, confirmed by the user: `gpt-6-sol` with `max` reasoning; `features.memories=false`, `features.multi_agent=false`, and `features.image_generation=false`. No additional user-specified time or token limit was set. The sole implementation attempt was selected; the cloud adjustment described above occurred during that attempt.
+- After the original run, a separate Codex review opened the committed HTML through a local HTTP server in ordinary Chrome and observed the pelican scene. This was a post-run observation, separate from the model's own checks, and did not change the implementation files.
