@@ -25,6 +25,30 @@ The directory must already exist in the checkout. Paths must stay inside the mod
 
 Previews run in an iframe that permits scripts, pointer lock, and fullscreen while isolating the parent page. Implementations cannot access the site's DOM, cookies, or local storage. Project artwork on catalog cards is illustrative, not a screenshot of a model result.
 
+## Model comparison images
+
+Project pages can be searched by model name, provider, reasoning level, and
+harness. When at least two implementations have a screenshot, their cards offer
+a **Compare** toggle; selecting 2–8 downloads a themed PNG sheet composed
+locally in the browser from the original captures. The layout and caption rules
+live in [lib/comparison.ts](lib/comparison.ts).
+
+The catalog selects a PNG, JPG, JPEG, or WebP directly under a model's
+`screenshots/` directory. It prefers the stems `illustration`, `scene`, `preview`,
+then `desktop`, followed by the first filename in sorted order. For an explicit
+choice, add `comparison.json` beside the model README:
+
+```json
+{ "screenshot": "screenshots/02-gameplay.png" }
+```
+
+The path must resolve to a raster file inside that model's directory, including
+after resolving symlinks. Invalid explicit configuration fails the build. Use
+`{ "screenshot": null }` to opt out. Models without a capture remain browsable
+but cannot be selected. The pipeline copies only the chosen file under
+`public/previews/_comparisons/`; original captures are never changed. These are
+stored captures, not live screenshots of the running iframe.
+
 ## Languages and themes
 
 UI translations live in [lib/i18n.ts](lib/i18n.ts). Each language has static routes under `/en/`, `/zh/`, `/ja/`, and `/ko/`. The root chooses a saved language or a supported browser language, falling back to English. Changing languages preserves the page, query, and anchor. Original project names, prompts, and model records retain their source language.
