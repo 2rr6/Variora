@@ -4,8 +4,8 @@
 | --- | --- |
 | Model | `gpt-6-sol` |
 | Reasoning effort | `max` |
-| Provider | OpenAI (confirmed by the user for this run) |
-| Harness | Codex CLI `0.156.1` (`codex --version`) |
+| Provider | OpenAI |
+| Harness | Codex CLI `0.156.1` |
 
 ## Assistance used
 
@@ -29,4 +29,6 @@ Open [`app/index.html`](app/index.html) in a modern browser. The page has no bui
 
 - The separate Codex conversation that prepared this run supplied procedural instructions only: use a fresh independent task, avoid other model outputs and persistent memory, write to the designated model directory, complete the model record, and stop after a local commit for user review. It provided no animation design or implementation code.
 - Launch settings, confirmed by the user: `gpt-6-sol` with `max` reasoning; `features.memories=false`, `features.multi_agent=false`, and `features.image_generation=false`. No additional user-specified time or token limit was set. The sole implementation attempt was selected; the cloud adjustment described above occurred during that attempt.
+- Provider and launch settings were confirmed by the user; the harness version was reported by `codex --version`.
 - After the original run, a separate Codex review opened the committed HTML through a local HTTP server in ordinary Chrome and observed the pelican scene. This was a post-run observation, separate from the model's own checks, and did not change the implementation files.
+- `screenshots/scene.png` was captured during maintainer review from the submitted `app/index.html` in headless Chromium at 1440 × 900; the page rendered with zero console or page errors and no external requests. The implementation files were not changed.

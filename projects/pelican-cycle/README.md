@@ -6,7 +6,7 @@
 
 | Implementation | Notes | Preview |
 | --- | --- | --- |
-| [GPT-6 Sol / Max](models/gpt-6-sol-max/) | | [index.html](models/gpt-6-sol-max/app/index.html) |
+| [GPT-6 Sol / Max](models/gpt-6-sol-max/) | Self-contained coastal SVG scene; animated pedals, legs and wheel spokes, pause control with reduced-motion support. | [index.html](models/gpt-6-sol-max/app/index.html) |
 | [SWE-2 · Max](models/swe-2/) | Clean coastal SVG scene with a cycling pelican and animated landscape details. | [index.html](models/swe-2/app/index.html) |
 | [Step 5 · High](models/step-5/) | Detailed seaside boardwalk animation with layered parallax and playback controls. | [index.html](models/step-5/app/index.html) |
 | [MiMo V2.6 Flash (Free) · Thinking](models/mimo-v2-6-flash-free/) | Playful standalone SVG ride with layered scenery and synchronized motion. | [index.html](models/mimo-v2-6-flash-free/app/index.html) |
