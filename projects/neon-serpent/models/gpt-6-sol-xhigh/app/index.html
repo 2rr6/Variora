@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070b19" />
+    <meta name="description" content="Neon Serpent — a first-person cyberpunk snake game." />
+    <title>Neon Serpent // Sector 09</title>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="game" aria-label="First-person 3D Neon Serpent game"></canvas>
+      <div class="screen-grain" aria-hidden="true"></div>
+      <div class="vignette" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">蛇</span><span>NEON <strong>SERPENT</strong><small>SECTOR 09 // NIGHT RUN</small></span></div>
+        <div class="top-status"><span class="live-dot"></span><span id="status-label">SYSTEM STANDBY</span><span class="status-divider">/</span><span id="time-label">00:00</span></div>
+        <button id="sound-button" class="icon-button" type="button" aria-label="Enable sound" title="Toggle sound">SOUND <span id="sound-state">OFF</span></button>
+      </header>
+
+      <main class="hud" aria-live="polite">
+        <section class="score-panel" aria-label="Game statistics">
+          <div class="eyebrow">RUN DATA <span>01 / 03</span></div>
+          <div class="score-label">SCORE</div>
+          <div class="score-value" id="score">00000</div>
+          <div class="stat-row"><span>ENERGY</span><strong id="energy-count">00</strong></div>
+          <div class="stat-row"><span>LENGTH</span><strong id="length-count">04</strong></div>
+          <div class="speed-wrap"><div class="speed-copy"><span>VELOCITY</span><strong id="speed-label">01 / 05</strong></div><div class="speed-track"><div id="speed-fill"></div></div></div>
+        </section>
+
+        <div class="center-reticle" aria-hidden="true"><span></span><i></i><span></span></div>
+
+        <div class="mission-panel" id="mission-panel"><span class="mission-icon">◇</span><div><small>CURRENT OBJECTIVE</small><strong>COLLECT THE ENERGY CORE</strong></div><span class="mission-arrow">↗</span></div>
+
+        <section class="radar-panel" aria-label="Area map">
+          <div class="radar-head"><span>SECTOR MAP</span><span id="radar-coords">X 00 / Z 06</span></div>
+          <canvas id="radar" width="220" height="220" aria-label="Map showing serpent, energy and obstacles"></canvas>
+          <div class="radar-key"><span><i class="key-head"></i>YOU</span><span><i class="key-core"></i>CORE</span><span><i class="key-block"></i>BLOCK</span></div>
+        </section>
+
+        <div class="bottom-left"><span>W / ↑ <b>BOOST</b></span><span>A D / ← → <b>STEER</b></span><span>SPACE <b>PAUSE</b></span></div>
+        <div class="bottom-right">TOKYO GRID // <strong>35.6762° N</strong></div>
+      </main>
+
+      <div id="overlay" class="overlay">
+        <div class="overlay-panel">
+          <div class="overlay-corner corner-a"></div><div class="overlay-corner corner-b"></div>
+          <div class="overlay-kicker"><span class="kicker-line"></span><span id="overlay-kicker">ARCADE PROTOCOL // 01</span></div>
+          <div class="overlay-glyph" aria-hidden="true">蛇</div>
+          <h1 id="overlay-title">NEON<br /><em>SERPENT</em></h1>
+          <p id="overlay-copy">Outrun the city. Harvest its energy. Never cross your own trail.</p>
+          <div id="overlay-result" class="overlay-result" hidden></div>
+          <div class="overlay-controls" id="overlay-controls"><span><kbd>A</kbd><kbd>D</kbd> or <kbd>←</kbd><kbd>→</kbd> to turn</span><span><kbd>SPACE</kbd> to pause</span></div>
+          <button id="overlay-sound" class="overlay-sound" type="button">AUDIO <span id="overlay-sound-state">OFF</span></button>
+          <button id="start-button" class="start-button" type="button"><span id="start-label">INITIATE RUN</span><span>↗</span></button>
+          <div class="overlay-footer"><span>01 — SURVIVE</span><span>02 — COLLECT</span><span>03 — REPEAT</span></div>
+        </div>
+      </div>
+      <div id="flash" class="flash" aria-hidden="true"></div>
+      <div id="message" class="message" aria-live="polite"></div>
+      <div class="touch-controls" aria-label="Touch steering controls"><button id="turn-left" type="button" aria-label="Turn left">↶</button><button id="touch-pause" type="button" aria-label="Pause or resume">Ⅱ</button><button id="turn-right" type="button" aria-label="Turn right">↷</button></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
