@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10152c">
+  <meta name="description" content="A small midnight story: a cat, a robot, one bowl of ramen, and a very rainy night.">
+  <title>Rainy Ramen — a small midnight story</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      background: #10152c;
+      color: #fff5e3;
+    }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; min-height: 100%; margin: 0; }
+    body { overflow: hidden; }
+    button { font: inherit; }
+    .scene {
+      position: relative;
+      isolation: isolate;
+      width: 100%;
+      height: 100vh;
+      height: 100svh;
+      min-height: 530px;
+      overflow: hidden;
+      background: radial-gradient(circle at 63% 45%, #283653 0, #11162e 57%, #0b1026 100%);
+    }
+    .scene::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      box-shadow: inset 0 0 140px 45px rgba(5, 8, 25, .64);
+    }
+    .art {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .heading {
+      position: absolute;
+      z-index: 4;
+      top: clamp(25px, 5vh, 58px);
+      left: clamp(26px, 5.6vw, 94px);
+      max-width: min(42vw, 470px);
+      pointer-events: none;
+      text-shadow: 0 3px 23px #091125, 0 2px 3px #091125;
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: #b6e5e9;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .29em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 21px;
+      height: 1px;
+      background: #80dadd;
+      box-shadow: 0 0 8px #80dadd;
+    }
+    h1 {
+      margin: 12px 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 6.6vw, 98px);
+      font-weight: 400;
+      letter-spacing: -.066em;
+      line-height: .91;
+      white-space: nowrap;
+    }
+    h1 em {
+      color: #ffb2a3;
+      font-weight: 400;
+    }
+    .heading p {
+      margin: 15px 0 0;
+      color: #cad7e3;
+      font-size: clamp(11px, 1.08vw, 15px);
+      letter-spacing: .08em;
+      line-height: 1.45;
+    }
+    .controls {
+      position: absolute;
+      z-index: 5;
+      bottom: clamp(19px, 3.4vh, 38px);
+      left: clamp(22px, 5.4vw, 92px);
+      display: flex;
+      gap: 8px;
+    }
+    .control {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 39px;
+      padding: 0 16px;
+      border: 1px solid rgba(174, 230, 228, .46);
+      border-radius: 40px;
+      background: rgba(11, 23, 42, .69);
+      color: #edfbf4;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      transition: background .2s, border-color .2s, transform .2s;
+      backdrop-filter: blur(10px);
+    }
+    .control:hover {
+      transform: translateY(-2px);
+      background: rgba(22, 47, 66, .92);
+      border-color: #aee6e4;
+    }
+    .control:focus-visible { outline: 3px solid #ffd7ad; outline-offset: 3px; }
+    .control[aria-pressed="true"] {
+      color: #102437;
+      border-color: #f2c9a6;
+      background: #f2c9a6;
+    }
+    .control svg { width: 17px; height: 17px; flex: none; }
+    .corner-note {
+      position: absolute;
+      z-index: 4;
+      right: clamp(23px, 5.6vw, 94px);
+      bottom: clamp(23px, 3.9vh, 43px);
+      color: #a7c9cd;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-align: right;
+      text-shadow: 0 2px 8px #091125;
+      text-transform: uppercase;
+    }
+    .corner-note strong {
+      display: block;
+      margin-top: 5px;
+      color: #f9bba9;
+      font-family: Georgia, serif;
+      font-size: 21px;
+      font-weight: 400;
+      letter-spacing: .03em;
+      text-transform: none;
+    }
+    .neon-core { animation: neon-breathe 5.5s ease-in-out infinite; }
+    .neon-flicker { animation: neon-flicker 9s infinite; }
+    .lantern { transform-origin: 819px 357px; animation: lantern-sway 5s ease-in-out infinite alternate; }
+    .steam { fill: none; stroke: #fff9df; stroke-linecap: round; stroke-width: 4; opacity: .57; }
+    .steam.one { animation: steam-rise 3.6s ease-out infinite; }
+    .steam.two { animation: steam-rise 3.6s ease-out -1.2s infinite; }
+    .steam.three { animation: steam-rise 3.6s ease-out -2.4s infinite; }
+    .robot-eye { transform-box: fill-box; transform-origin: center; animation: blink 7s infinite; }
+    .puddle-shine { animation: puddle-pulse 4s ease-in-out infinite alternate; }
+    .rain-line {
+      stroke-linecap: round;
+      animation-name: rain-fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    .still *, .still *::before, .still *::after { animation-play-state: paused !important; }
+    @keyframes rain-fall {
+      from { transform: translate3d(-18px, -100px, 0); opacity: 0; }
+      23% { opacity: 1; }
+      77% { opacity: 1; }
+      to { transform: translate3d(26px, 135px, 0); opacity: 0; }
+    }
+    @keyframes neon-breathe {
+      0%, 100% { opacity: .95; }
+      50% { opacity: .7; }
+    }
+    @keyframes neon-flicker {
+      0%, 77%, 79%, 81%, 100% { opacity: 1; }
+      78%, 80% { opacity: .48; }
+    }
+    @keyframes lantern-sway {
+      from { transform: rotate(-2deg); }
+      to { transform: rotate(2deg); }
+    }
+    @keyframes steam-rise {
+      from { transform: translateY(11px) scale(.83); opacity: 0; }
+      24% { opacity: .68; }
+      to { transform: translateY(-39px) scale(1.18); opacity: 0; }
+    }
+    @keyframes blink {
+      0%, 46%, 49%, 100% { transform: scaleY(1); }
+      47% { transform: scaleY(.13); }
+    }
+    @keyframes puddle-pulse {
+      from { opacity: .48; }
+      to { opacity: .8; }
+    }
+    @media (max-width: 700px) {
+      .heading { top: 25px; left: 23px; max-width: 90vw; }
+      h1 { margin-top: 10px; font-size: clamp(42px, 13vw, 70px); }
+      .heading p { max-width: 250px; font-size: 11px; }
+      .controls { left: 19px; bottom: 20px; gap: 6px; }
+      .control { min-height: 37px; padding: 0 11px; font-size: 9px; gap: 6px; }
+      .corner-note { right: 20px; bottom: 75px; font-size: 8px; }
+      .corner-note strong { font-size: 16px; }
+    }
+    @media (max-width: 390px) {
+      .corner-note { display: none; }
+      .control { padding: 0 9px; font-size: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="scene" id="scene">
+    <div class="heading">
+      <div class="eyebrow">A small midnight story</div>
+      <h1>Rainy <em>Ramen</em></h1>
+      <p>One warm bowl, delivered beneath a borrowed sky.</p>
+    </div>
+
+    <svg class="art" id="art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="art-title art-desc">
+      <title id="art-title">Rainy Ramen</title>
+      <desc id="art-desc">Outside a glowing Japanese ramen shop at night, a cat server offers a steaming bowl of ramen to a small robot holding a transparent umbrella. Neon signs shine through the rain and reflect in the street.</desc>
+      <defs>
+        <linearGradient id="sky" x2="0" y2="1">
+          <stop stop-color="#0b1230"/>
+          <stop offset=".57" stop-color="#202c48"/>
+          <stop offset="1" stop-color="#172b43"/>
+        </linearGradient>
+        <radialGradient id="horizon">
+          <stop stop-color="#d66a80" stop-opacity=".39"/>
+          <stop offset="1" stop-color="#d66a80" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="moonGlow">
+          <stop stop-color="#b8f7f1" stop-opacity=".4"/>
+          <stop offset="1" stop-color="#b8f7f1" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="shopWall" x2=".95" y2="1">
+          <stop stop-color="#3b4257"/>
+          <stop offset=".55" stop-color="#343149"/>
+          <stop offset="1" stop-color="#232c43"/>
+        </linearGradient>
+        <linearGradient id="glass" x1="0" y1="0" x2=".92" y2="1">
+          <stop stop-color="#ffddaa"/>
+          <stop offset=".42" stop-color="#d78d78"/>
+          <stop offset="1" stop-color="#5b4567"/>
+        </linearGradient>
+        <radialGradient id="interiorLight">
+          <stop stop-color="#ffe0a3" stop-opacity=".86"/>
+          <stop offset="1" stop-color="#ffbd87" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="sign" x2="0" y2="1">
+          <stop stop-color="#5a3248"/>
+          <stop offset="1" stop-color="#3d3047"/>
+        </linearGradient>
+        <linearGradient id="road" x2="0" y2="1">
+          <stop stop-color="#253a4b"/>
+          <stop offset=".39" stop-color="#172a3d"/>
+          <stop offset="1" stop-color="#101b33"/>
+        </linearGradient>
+        <linearGradient id="umbrella" x1="0" y1="0" x2="1" y2="1">
+          <stop stop-color="#f0ffff" stop-opacity=".71"/>
+          <stop offset=".46" stop-color="#89dde7" stop-opacity=".34"/>
+          <stop offset="1" stop-color="#7fb4df" stop-opacity=".49"/>
+        </linearGradient>
+        <linearGradient id="robot" x1="0" y1="0" x2="1" y2="1">
+          <stop stop-color="#d9e9e1"/>
+          <stop offset=".5" stop-color="#a9c4c9"/>
+          <stop offset="1" stop-color="#637b93"/>
+        </linearGradient>
+        <linearGradient id="bowl" x2="0" y2="1">
+          <stop stop-color="#fff5d8"/>
+          <stop offset="1" stop-color="#d9c6b1"/>
+        </linearGradient>
+        <linearGradient id="catCoat" x2=".9" y2="1">
+          <stop stop-color="#f4b67d"/>
+          <stop offset="1" stop-color="#ce7a61"/>
+        </linearGradient>
+        <pattern id="brick" width="72" height="33" patternUnits="userSpaceOnUse">
+          <path d="M0 0H72 M0 33H72 M0 0V16 M36 16V33 M72 0V16" fill="none" stroke="#151e31" stroke-opacity=".35" stroke-width="2"/>
+        </pattern>
+        <pattern id="windowDots" width="54" height="51" patternUnits="userSpaceOnUse">
+          <rect x="12" y="13" width="12" height="16" rx="1" fill="#ffdca7" opacity=".25"/>
+        </pattern>
+        <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="13"/>
+        </filter>
+        <filter id="neonGlow" x="-60%" y="-80%" width="220%" height="260%">
+          <feGaussianBlur stdDeviation="6" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="13"/>
+        </filter>
+      </defs>
+
+      <!-- The city beyond the little shop -->
+      <rect width="1440" height="900" fill="url(#sky)"/>
+      <ellipse cx="1120" cy="315" rx="550" ry="350" fill="url(#horizon)"/>
+      <circle cx="1141" cy="159" r="169" fill="url(#moonGlow)"/>
+      <circle cx="1141" cy="159" r="42" fill="#c7eff1" opacity=".77"/>
+      <path d="M1111 134c22-17 50-7 64 12-24-9-41-4-64-12Z" fill="#effff5" opacity=".43"/>
+      <g fill="#e3f0e7" opacity=".46">
+        <circle cx="968" cy="118" r="1.8"/><circle cx="1052" cy="80" r="1.3"/><circle cx="1259" cy="98" r="1.7"/>
+        <circle cx="1312" cy="225" r="1.4"/><circle cx="948" cy="245" r="1.3"/><circle cx="1383" cy="115" r="1.1"/>
+      </g>
+      <path d="M0 303c93-32 203-34 294 2 73 30 157 29 239 2 58-18 112-20 182-2 71 18 134 13 194-20 49-27 89-23 138 1 70 33 176 21 248-4 50-18 101-17 145 0V0H0Z" fill="#151d37" opacity=".38"/>
+      <g fill="#172139">
+        <path d="M0 328h104v323H0z M65 285h91v366H65z M132 352h75v299h-75z"/>
+        <path d="M870 337h118v325H870z M978 283h107v379H978z M1077 333h95v329h-95z M1164 253h130v409h-130z M1280 310h160v352h-160z"/>
+      </g>
+      <g fill="url(#windowDots)" opacity=".9">
+        <path d="M0 328h207v323H0z M870 337h302v325H870z M1164 253h276v409h-276z"/>
+      </g>
+      <g stroke="#668292" stroke-width="2" opacity=".4" fill="none">
+        <path d="M0 222c154 32 356 25 534-3s396-19 559 19 266 26 347 10"/>
+        <path d="M0 241c179 23 351 12 540-7s378-3 532 25 270 24 368 10"/>
+      </g>
+      <path d="M1327 154v529 M1297 188h82 M1311 201h51" stroke="#273447" stroke-width="8" fill="none"/>
+      <path d="M1348 189c-33 94-42 188-42 288" stroke="#26344b" stroke-width="3" fill="none"/>
+      <g id="rain-back" opacity=".45"></g>
+
+      <!-- Pools of light on the shop wall -->
+      <ellipse cx="486" cy="486" rx="405" ry="324" fill="#ec8c7f" opacity=".14" filter="url(#softGlow)"/>
+      <path d="M95 209h784v491H95z" fill="#141d32" opacity=".65" transform="translate(16 15)" filter="url(#shadow)"/>
+      <path d="M93 209h785v491H93z" fill="url(#shopWall)" stroke="#1b263c" stroke-width="9"/>
+      <path d="M93 209h785v491H93z" fill="url(#brick)" opacity=".75"/>
+      <path d="M75 205h828l-14 42H91Z" fill="#20293f" stroke="#415267" stroke-width="4"/>
+      <path d="M77 206h828" stroke="#698291" stroke-opacity=".5" stroke-width="3"/>
+      <path d="M115 248h746v419H115z" fill="none" stroke="#667079" stroke-opacity=".22" stroke-width="3"/>
+
+      <!-- Neon sign and the lantern -->
+      <rect x="244" y="243" width="562" height="104" rx="11" fill="#e88282" opacity=".26" filter="url(#softGlow)"/>
+      <rect x="244" y="242" width="562" height="104" rx="11" fill="url(#sign)" stroke="#d98286" stroke-width="5"/>
+      <rect x="258" y="254" width="534" height="80" rx="5" fill="none" stroke="#eeac9b" stroke-width="2" opacity=".6"/>
+      <g class="neon-flicker" filter="url(#neonGlow)">
+        <text x="525" y="311" text-anchor="middle" fill="#ffd2b5" font-family="'Yu Gothic', 'Meiryo', sans-serif" font-size="46" font-weight="700" letter-spacing="9">雨宿り</text>
+      </g>
+      <text x="527" y="331" text-anchor="middle" fill="#e9cabb" font-family="'Trebuchet MS', sans-serif" font-size="10" font-weight="800" letter-spacing="7">RAMEN &amp; REST</text>
+      <rect x="126" y="336" width="81" height="260" rx="7" fill="#f57f9b" opacity=".24" filter="url(#softGlow)"/>
+      <rect x="129" y="339" width="75" height="253" rx="6" fill="#3b354c" stroke="#ef8298" stroke-width="4"/>
+      <g class="neon-core" fill="#ff9aab" filter="url(#neonGlow)" text-anchor="middle" font-family="'Yu Gothic', 'Meiryo', sans-serif" font-size="33" font-weight="700">
+        <text x="166" y="389">ラ</text><text x="166" y="440">ー</text><text x="166" y="491">メ</text><text x="166" y="542">ン</text>
+      </g>
+      <path d="M819 347v30" stroke="#1b2438" stroke-width="7"/>
+      <g class="lantern">
+        <ellipse cx="819" cy="424" rx="35" ry="51" fill="#ffad8b" opacity=".32" filter="url(#softGlow)"/>
+        <path d="M798 383c11-7 32-7 43 0l8 15v50l-8 16c-12 6-32 6-44 0l-8-16v-50Z" fill="#eeaa82" stroke="#893f54" stroke-width="5"/>
+        <path d="M790 402h59 M790 446h59 M799 383c-5 24-6 53 0 81 M839 383c5 24 6 53 0 81" stroke="#9f5061" stroke-width="3" opacity=".6"/>
+        <text x="819" y="433" text-anchor="middle" font-family="'Yu Gothic', sans-serif" font-size="27" font-weight="700" fill="#713548">麺</text>
+        <path d="M802 378h34 M803 469h32" stroke="#3f3144" stroke-width="7" stroke-linecap="round"/>
+      </g>
+
+      <!-- Warm interior behind rain-streaked glass -->
+      <path d="M224 349h584v315H224z" fill="#111d32" stroke="#1a2437" stroke-width="9"/>
+      <path d="M239 362h554v287H239z" fill="url(#glass)"/>
+      <ellipse cx="514" cy="438" rx="298" ry="192" fill="url(#interiorLight)"/>
+      <path d="M239 362h554v287H239z" fill="#efb486" opacity=".12"/>
+      <path d="M241 591h550v56H241z" fill="#4f3c4d" opacity=".66"/>
+      <path d="M251 578h526v18H251z" fill="#392d42"/>
+      <g fill="#322b3d" opacity=".82">
+        <path d="M288 470h61v112h-61z M301 451h35v29h-35z M395 488h49v94h-49z M598 472h58v110h-58z"/>
+        <path d="M275 560h390v16H275z"/>
+      </g>
+      <g fill="#f9d3a1" opacity=".72">
+        <rect x="280" y="427" width="9" height="23" rx="3"/><rect x="295" y="413" width="13" height="37" rx="3"/>
+        <rect x="318" y="420" width="10" height="30" rx="3"/><rect x="380" y="432" width="12" height="19" rx="3"/>
+        <rect x="607" y="412" width="12" height="38" rx="3"/><rect x="624" y="427" width="9" height="23" rx="3"/>
+      </g>
+      <path d="M311 364v112 M499 364v83 M702 364v112" stroke="#633b47" stroke-width="4" opacity=".5"/>
+      <g>
+        <path d="M353 368v67 M549 368v67 M699 368v67" stroke="#453648" stroke-width="4"/>
+        <path d="M335 434h36l-7 15h-23Z M531 434h36l-7 15h-23Z M681 434h36l-7 15h-23Z" fill="#f8cda0" opacity=".84"/>
+        <ellipse cx="353" cy="449" rx="38" ry="29" fill="#ffd9a7" opacity=".2" filter="url(#softGlow)"/>
+        <ellipse cx="549" cy="449" rx="38" ry="29" fill="#ffd9a7" opacity=".2" filter="url(#softGlow)"/>
+      </g>
+      <g stroke="#e9dfc5" stroke-width="3" stroke-linecap="round" opacity=".26">
+        <path d="M270 405l-22 80 M465 400l-22 90 M767 438l-16 68 M567 510l-11 61"/>
+        <path d="M370 555l-7 22 M737 554l-4 29 M268 536l-5 18"/>
+      </g>
+      <g fill="#eaf6e2" opacity=".25">
+        <circle cx="260" cy="490" r="5"/><circle cx="371" cy="501" r="3"/><circle cx="473" cy="454" r="4"/>
+        <circle cx="604" cy="532" r="5"/><circle cx="765" cy="524" r="4"/>
+      </g>
+      <!-- Door, timber posts and the short fabric curtains -->
+      <path d="M636 349v315 M791 349v315 M226 349v315" stroke="#302c3f" stroke-width="15"/>
+      <path d="M237 498h551 M237 649h551" stroke="#332c3d" stroke-width="9"/>
+      <path d="M636 497v151" stroke="#5a3444" stroke-width="6"/>
+      <circle cx="773" cy="526" r="5" fill="#ffddaa"/>
+      <path d="M235 354h550" stroke="#edb18c" stroke-width="9"/>
+      <g fill="#ae5764" stroke="#724155" stroke-width="3">
+        <path d="M256 365h85v83q-43 10-85 0Z"/>
+        <path d="M343 365h85v83q-43 10-85 0Z"/>
+        <path d="M430 365h85v83q-43 10-85 0Z"/>
+        <path d="M517 365h85v83q-43 10-85 0Z"/>
+      </g>
+      <path d="M256 365h346" stroke="#e8a58e" stroke-width="6"/>
+      <g fill="#ffdbb6" font-family="'Yu Gothic', sans-serif" font-size="30" font-weight="700" text-anchor="middle">
+        <text x="298" y="421">あ</text><text x="385" y="421">た</text><text x="472" y="421">た</text><text x="559" y="421">か</text>
+      </g>
+      <path d="M232 659h580v26H232z" fill="#2e3448"/>
+      <path d="M218 683h613l29 28H197Z" fill="#6b5360"/>
+      <path d="M197 711h663v13H197z" fill="#40384e"/>
+      <path d="M225 686h583" stroke="#ae8280" stroke-width="3" opacity=".6"/>
+      <path d="M146 686h63 M112 703h93" stroke="#5f6b74" stroke-width="7" stroke-linecap="round"/>
+      <g transform="translate(858 625)">
+        <path d="M13 74c-13-19-15-35-9-48 12 6 19 14 22 23-1-28 7-42 18-49 8 23 6 42-2 57 11-17 23-22 38-20-3 19-11 31-23 37Z" fill="#466d68"/>
+        <path d="M8 68h62l-9 43H17Z" fill="#605361" stroke="#a68788" stroke-width="3"/>
+        <path d="M12 78h54" stroke="#c5928d" stroke-width="3"/>
+      </g>
+
+      <!-- Wet pavement -->
+      <path d="M0 695h1440v205H0z" fill="url(#road)"/>
+      <path d="M0 695c334 21 565 12 815 5s429 7 625-7v39c-387-5-760 7-1440 8Z" fill="#526170" opacity=".47"/>
+      <path d="M0 714c421 22 831 4 1440 7" fill="none" stroke="#94a8a5" stroke-width="3" opacity=".4"/>
+      <g opacity=".43">
+        <path d="M220 733l490 3-50 114-525 1Z" fill="#c86e7a" opacity=".23"/>
+        <path d="M336 739l278 1-17 140-274 3Z" fill="#ffa179" opacity=".15"/>
+        <path d="M988 755l128-3 117 148H935Z" fill="#89d7e7" opacity=".13"/>
+        <path d="M1114 760l125-2 129 142h-205Z" fill="#ef9da5" opacity=".12"/>
+      </g>
+      <g fill="none" stroke-linecap="round">
+        <path d="M74 769c125-15 261-13 389-4 M281 786c92 4 191 0 258-5 M444 812c97-9 171-7 223-4" stroke="#efb190" stroke-width="4" opacity=".35"/>
+        <path d="M762 773c119-10 248-8 328-2 M889 795c160 8 308 2 382-8 M981 817c87-3 171 0 256 4" stroke="#94d6df" stroke-width="4" opacity=".27"/>
+        <path d="M90 849c94-6 201-5 252-1 M562 861c92-2 178-2 248 0 M1001 859c113-5 206-4 303 0" stroke="#698da3" stroke-width="3" opacity=".32"/>
+      </g>
+      <g class="puddle-shine">
+        <ellipse cx="420" cy="750" rx="177" ry="8" fill="#efb193" opacity=".32"/>
+        <ellipse cx="1048" cy="764" rx="188" ry="7" fill="#87dce1" opacity=".25"/>
+        <ellipse cx="750" cy="838" rx="254" ry="6" fill="#f49d92" opacity=".15"/>
+      </g>
+
+      <!-- The clear umbrella is held by the robot -->
+      <g>
+        <path d="M1033 408v239q0 20 17 20 17 0 17-19" fill="none" stroke="#253b50" stroke-width="11" stroke-linecap="round"/>
+        <path d="M1033 408v235q0 20 17 20" fill="none" stroke="#d2e6de" stroke-width="4" stroke-linecap="round"/>
+        <path d="M855 465c37-97 114-150 178-150 77 0 151 58 183 150-27-12-53-12-78 6-27-17-53-18-79 3-21-18-47-20-73 0-23-18-48-20-75-4-18-15-36-17-56-5Z" fill="url(#umbrella)" stroke="#b6e4e5" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M1033 318c-74 48-113 98-122 152 M1033 318c-39 40-59 90-47 156 M1033 318c34 44 42 93 26 156 M1033 318c65 46 101 102 105 153" fill="none" stroke="#e2ffff" stroke-width="3" opacity=".54"/>
+        <path d="M871 450c85-106 216-161 330-8" fill="none" stroke="#f2ffff" stroke-width="6" stroke-linecap="round" opacity=".72"/>
+        <path d="M923 394c-15 22-26 48-31 65 M968 348c-10 11-20 26-28 43" stroke="#fff" stroke-opacity=".55" stroke-width="6" stroke-linecap="round"/>
+        <path d="M1033 318v-15" stroke="#d8f4f1" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="1033" cy="301" r="7" fill="#ffd4aa"/>
+        <circle cx="911" cy="470" r="4" fill="#e7fcf3"/><circle cx="986" cy="474" r="4" fill="#e7fcf3"/>
+        <circle cx="1059" cy="474" r="4" fill="#e7fcf3"/><circle cx="1138" cy="471" r="4" fill="#e7fcf3"/>
+      </g>
+
+      <!-- Cat server: striped tail, uniform, face and outstretched paw -->
+      <g>
+        <ellipse cx="674" cy="744" rx="120" ry="15" fill="#081a2a" opacity=".52"/>
+        <path d="M624 657c-44 39-89 27-94 4-6-23 24-38 43-20" fill="none" stroke="#a55554" stroke-width="31" stroke-linecap="round"/>
+        <path d="M557 651c-13-7-22-5-30 3 M586 677c-10 6-21 8-32 6" fill="none" stroke="#edaa76" stroke-width="10" stroke-linecap="round"/>
+        <path d="M623 688l-6 55h44l8-50 M686 692l8 51h45l-11-58" fill="#713f4d" stroke="#4d3945" stroke-width="5"/>
+        <path d="M613 741q30-8 53 0v14h-55Z M691 741q27-8 51 0l3 14h-57Z" fill="#23374a" stroke="#a5726d" stroke-width="4"/>
+        <path d="M620 567c-14 18-22 47-16 88l13 56h115l13-56c5-39-9-73-27-91Z" fill="url(#catCoat)" stroke="#7b4650" stroke-width="6"/>
+        <path d="M617 585c31 21 77 26 116 0v113H617Z" fill="#f5dfbd" stroke="#c89b81" stroke-width="5"/>
+        <path d="M660 591v103 M625 614h102" stroke="#d5af94" stroke-width="3" opacity=".55"/>
+        <path d="M620 567c17 28 37 34 54 34s34-7 48-31" fill="none" stroke="#744957" stroke-width="12"/>
+        <path d="M626 604c-27-7-44 12-47 39" fill="none" stroke="#d78763" stroke-width="25" stroke-linecap="round"/>
+        <path d="M577 641c-9 16-5 25 8 31 12 4 23-2 25-13" fill="#edac77" stroke="#985b57" stroke-width="4"/>
+        <path d="M718 602c24-14 34-27 52-35" fill="none" stroke="#d58264" stroke-width="24" stroke-linecap="round"/>
+        <path d="M757 570c7-10 18-12 28-6l8 7-2 15-19 3Z" fill="#edac78" stroke="#965658" stroke-width="4"/>
+        <path d="M618 502l-9-55q18-4 42 30 M683 476q22-31 43-25l-8 60" fill="#eaa373" stroke="#8d5557" stroke-width="6" stroke-linejoin="round"/>
+        <path d="M620 476l-3-20 19 22 M704 477l15-17-3 27" fill="#d97677"/>
+        <path d="M607 510c-3-40 26-62 63-64 37-2 68 26 67 65-1 41-25 71-64 73-39 1-69-30-66-74Z" fill="#efae79" stroke="#8c5557" stroke-width="6"/>
+        <path d="M610 506c13-8 27-8 37 0 M696 502c12-8 24-7 37 2" stroke="#d78b69" stroke-width="8" stroke-linecap="round"/>
+        <path d="M657 456c-6 15-5 28-1 39 M678 455c-4 14-4 27 0 38 M698 464c-2 10-1 18 2 26" stroke="#d88968" stroke-width="8" stroke-linecap="round"/>
+        <ellipse cx="643" cy="526" rx="6" ry="9" fill="#463c46"/>
+        <ellipse cx="705" cy="524" rx="6" ry="9" fill="#463c46"/>
+        <circle cx="645" cy="523" r="2" fill="#fff8dc"/><circle cx="707" cy="521" r="2" fill="#fff8dc"/>
+        <path d="M666 545q8 7 16 0-4-8-8-8t-8 8Z" fill="#924f57"/>
+        <path d="M674 547v8m0 0q-11 8-19-1m19 1q12 8 20-1" fill="none" stroke="#784752" stroke-width="3" stroke-linecap="round"/>
+        <ellipse cx="634" cy="546" rx="11" ry="7" fill="#f09782" opacity=".67"/>
+        <ellipse cx="715" cy="544" rx="11" ry="7" fill="#f09782" opacity=".67"/>
+        <g stroke="#fcddae" stroke-width="2.7" stroke-linecap="round" opacity=".93">
+          <path d="M647 547l-31-8 M647 555l-32 3 M700 546l30-9 M701 553l31 3"/>
+        </g>
+        <path d="M649 575q23 12 49 1" fill="none" stroke="#f9d2a0" stroke-width="6" opacity=".55"/>
+      </g>
+
+      <!-- The offered bowl sits between the two friends -->
+      <g>
+        <ellipse cx="830" cy="585" rx="102" ry="14" fill="#1f2738" opacity=".35"/>
+        <path d="M765 576h148q5 0 4 6l-7 7H767l-8-7q-1-6 6-6Z" fill="#73505a" stroke="#deac8c" stroke-width="5"/>
+        <ellipse cx="835" cy="574" rx="67" ry="8" fill="#bd8174"/>
+        <path d="M779 531h114c-4 32-16 48-34 51h-48c-18-5-28-22-32-51Z" fill="url(#bowl)" stroke="#a95b60" stroke-width="5"/>
+        <ellipse cx="836" cy="530" rx="59" ry="15" fill="#f8e5c5" stroke="#a95b60" stroke-width="5"/>
+        <ellipse cx="836" cy="528" rx="51" ry="9" fill="#9c5b49"/>
+        <path d="M797 527q17-10 32-4t32-1q11 0 17 5" fill="none" stroke="#f5d68f" stroke-width="5" stroke-linecap="round"/>
+        <path d="M813 524q9-5 16-4 M845 520q9 3 18 2" stroke="#fbe7a5" stroke-width="3" fill="none"/>
+        <ellipse cx="809" cy="528" rx="10" ry="4" fill="#d98570"/>
+        <ellipse cx="863" cy="528" rx="10" ry="4" fill="#d98570"/>
+        <circle cx="849" cy="525" r="4" fill="#488e70"/>
+        <path d="M875 511l49-33 M871 507l44-36" stroke="#e6c79b" stroke-width="4" stroke-linecap="round"/>
+        <path d="M793 548h85 M802 559h68" stroke="#c16d66" stroke-width="3" opacity=".69"/>
+        <path class="steam one" d="M807 501c-12-13 12-20 1-36"/>
+        <path class="steam two" d="M834 496c-12-16 13-19 2-38"/>
+        <path class="steam three" d="M859 499c-12-15 12-20 1-35"/>
+      </g>
+
+      <!-- Small robot reaching for dinner while gripping the umbrella -->
+      <g>
+        <ellipse cx="1041" cy="750" rx="91" ry="13" fill="#061a2b" opacity=".54"/>
+        <path d="M1003 695l-2 47h38l3-48 M1062 695l3 47h38l-7-47" fill="#7d9bab" stroke="#364d62" stroke-width="6"/>
+        <path d="M998 740h45v13h-51q-6-7 6-13Z M1065 740h42q13 5 6 13h-47Z" fill="#263b53" stroke="#9dbabc" stroke-width="4"/>
+        <path d="M997 611c-11 11-14 26-14 46v47q51 24 116 1v-50c0-19-7-34-21-44Z" fill="url(#robot)" stroke="#3b556a" stroke-width="7"/>
+        <path d="M1011 650h74v31q-40 11-74 0Z" fill="#436077" stroke="#92afbb" stroke-width="4"/>
+        <rect x="1031" y="660" width="33" height="14" rx="6" fill="#e4ae90" opacity=".85"/>
+        <path d="M988 636c-22-8-43-25-62-39" fill="none" stroke="#8caeb7" stroke-width="20" stroke-linecap="round"/>
+        <path d="M922 589c-11-4-17 0-20 10 7 14 20 16 31 7" fill="#c4d9d4" stroke="#466277" stroke-width="5"/>
+        <path d="M1095 638q-7 2-17 0l-30-6" fill="none" stroke="#8fb1ba" stroke-width="21" stroke-linecap="round"/>
+        <path d="M1041 618q-12-2-18 9-1 15 12 21 15 0 19-12" fill="#c6dcd6" stroke="#536e7f" stroke-width="5"/>
+        <rect x="955" y="508" width="153" height="112" rx="41" fill="url(#robot)" stroke="#40586b" stroke-width="7"/>
+        <path d="M972 537q63-24 120-1v53q-62 21-120-1Z" fill="#263e53" stroke="#7e9fac" stroke-width="5"/>
+        <path d="M977 537q60-18 109-3" fill="none" stroke="#d3e9e4" stroke-width="5" opacity=".42" stroke-linecap="round"/>
+        <g class="robot-eye" fill="#ffe5a5" filter="url(#neonGlow)">
+          <rect x="998" y="552" width="19" height="27" rx="9"/>
+          <rect x="1050" y="552" width="19" height="27" rx="9"/>
+        </g>
+        <path d="M1023 590q12 9 24 0" fill="none" stroke="#f7bba2" stroke-width="4" stroke-linecap="round"/>
+        <path d="M1033 508v-23" stroke="#99b9bf" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="1033" cy="479" r="9" fill="#ffb6a3" stroke="#5e657b" stroke-width="4"/>
+        <circle cx="955" cy="566" r="8" fill="#8aabb6" stroke="#43586c" stroke-width="4"/>
+        <circle cx="1109" cy="566" r="8" fill="#8aabb6" stroke="#43586c" stroke-width="4"/>
+        <circle cx="1048" cy="695" r="4" fill="#ffd49f"/>
+      </g>
+
+      <!-- Rain and small rings on the pavement -->
+      <g id="rain-front" opacity=".72"></g>
+      <g fill="none" stroke="#a7d9d8" stroke-width="2" opacity=".55">
+        <ellipse cx="165" cy="767" rx="30" ry="5"/><ellipse cx="165" cy="767" rx="15" ry="3"/>
+        <ellipse cx="1168" cy="791" rx="42" ry="6"/><ellipse cx="1168" cy="791" rx="22" ry="3"/>
+        <ellipse cx="684" cy="806" rx="35" ry="5"/><ellipse cx="684" cy="806" rx="16" ry="3"/>
+        <ellipse cx="1335" cy="741" rx="25" ry="4"/>
+      </g>
+      <g fill="#d8eff1" opacity=".7">
+        <circle cx="167" cy="764" r="2"/><circle cx="1168" cy="787" r="2"/>
+        <circle cx="684" cy="801" r="2"/><circle cx="1335" cy="738" r="2"/>
+      </g>
+    </svg>
+
+    <div class="controls" aria-label="Scene controls">
+      <button class="control" id="sound-toggle" type="button" aria-pressed="false">
+        <svg viewBox="0 0 20 20" aria-hidden="true" fill="none"><path d="M3 8v4h3l4 3V5L6 8H3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 7c2 1 2 5 0 6m2-8c4 2 4 8 0 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Hear the rain</span>
+      </button>
+      <button class="control" id="motion-toggle" type="button" aria-pressed="false">
+        <svg viewBox="0 0 20 20" aria-hidden="true" fill="none"><path d="M6 4v12m8-12v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <span>Pause scene</span>
+      </button>
+    </div>
+    <div class="corner-note">Open late, stay warm<strong>いらっしゃいませ</strong></div>
+  </main>
+  <script>
+    (function () {
+      "use strict";
+      const scene = document.getElementById("scene");
+      const art = document.getElementById("art");
+      const soundButton = document.getElementById("sound-toggle");
+      const motionButton = document.getElementById("motion-toggle");
+      const svgNS = "http://www.w3.org/2000/svg";
+      let seed = 21417;
+      function random() {
+        seed = (seed * 16807) % 2147483647;
+        return (seed - 1) / 2147483646;
+      }
+      function makeRain(parent, count, near) {
+        for (let i = 0; i < count; i += 1) {
+          const x = random() * 1510 - 35;
+          const y = random() * 1050 - 100;
+          const length = (near ? 13 : 8) + random() * (near ? 23 : 15);
+          const line = document.createElementNS(svgNS, "line");
+          line.setAttribute("x1", x.toFixed(1));
+          line.setAttribute("y1", y.toFixed(1));
+          line.setAttribute("x2", (x - length * .21).toFixed(1));
+          line.setAttribute("y2", (y + length).toFixed(1));
+          line.setAttribute("stroke", near ? "#b9edf0" : "#91b9ca");
+          line.setAttribute("stroke-width", near ? (1.3 + random() * 1.2).toFixed(1) : ".9");
+          line.setAttribute("opacity", (near ? .29 + random() * .36 : .23 + random() * .34).toFixed(2));
+          line.setAttribute("class", "rain-line");
+          line.style.animationDuration = (near ? .85 + random() * .9 : 1.4 + random() * 1.4).toFixed(2) + "s";
+          line.style.animationDelay = (-random() * 4).toFixed(2) + "s";
+          parent.appendChild(line);
+        }
+      }
+      makeRain(document.getElementById("rain-back"), 100, false);
+      makeRain(document.getElementById("rain-front"), 55, true);
+
+      const mobile = window.matchMedia("(max-width: 700px) and (orientation: portrait)");
+      function setFrame() {
+        art.setAttribute("viewBox", mobile.matches ? "560 -260 600 1298" : "0 0 1440 900");
+      }
+      setFrame();
+      mobile.addEventListener("change", setFrame);
+
+      motionButton.addEventListener("click", function () {
+        const paused = scene.classList.toggle("still");
+        motionButton.setAttribute("aria-pressed", String(paused));
+        motionButton.querySelector("span").textContent = paused ? "Play scene" : "Pause scene";
+      });
+
+      let audioContext;
+      let rainSource;
+      let rainGain;
+      function startRain() {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) {
+          soundButton.querySelector("span").textContent = "Audio unavailable";
+          soundButton.disabled = true;
+          return;
+        }
+        audioContext = audioContext || new AudioContextClass();
+        const seconds = 3;
+        const length = Math.floor(audioContext.sampleRate * seconds);
+        const buffer = audioContext.createBuffer(1, length, audioContext.sampleRate);
+        const channel = buffer.getChannelData(0);
+        let last = 0;
+        for (let i = 0; i < length; i += 1) {
+          last = (last + (Math.random() * 2 - 1) * .12) * .985;
+          channel[i] = last;
+        }
+        rainSource = audioContext.createBufferSource();
+        rainSource.buffer = buffer;
+        rainSource.loop = true;
+        const lowpass = audioContext.createBiquadFilter();
+        lowpass.type = "lowpass";
+        lowpass.frequency.value = 1250;
+        rainGain = audioContext.createGain();
+        rainGain.gain.value = 0;
+        rainSource.connect(lowpass).connect(rainGain).connect(audioContext.destination);
+        rainSource.start();
+        rainGain.gain.setTargetAtTime(.26, audioContext.currentTime, .2);
+        audioContext.resume();
+      }
+      function stopRain() {
+        if (!rainSource || !audioContext) return;
+        rainGain.gain.setTargetAtTime(0, audioContext.currentTime, .08);
+        const oldSource = rainSource;
+        window.setTimeout(function () { try { oldSource.stop(); } catch (_) {} }, 400);
+        rainSource = null;
+      }
+      soundButton.addEventListener("click", function () {
+        const playing = soundButton.getAttribute("aria-pressed") === "true";
+        if (playing) stopRain();
+        else startRain();
+        if (!soundButton.disabled) {
+          soundButton.setAttribute("aria-pressed", String(!playing));
+          soundButton.querySelector("span").textContent = playing ? "Hear the rain" : "Mute rain";
+        }
+      });
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden && audioContext) audioContext.suspend();
+        else if (!document.hidden && audioContext && rainSource) audioContext.resume();
+      });
+    }());
+  </script>
+</body>
+</html>
