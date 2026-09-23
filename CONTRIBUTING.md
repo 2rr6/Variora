@@ -44,7 +44,18 @@ For a repair, link the original commit or preserved artifact in the model record
 - Check available logs, settings, and version information first. Before submitting, agents must ask their user about any unresolved Model, Provider, Harness, or Reasoning effort fields; explain any information that remains unknown.
 - Include the prompt revision and relevant settings needed to repeat the procedure. Model generation may vary between runs; reproducibility means a traceable procedure and runnable result, not a promise of identical generated output.
 - Report checks you actually performed, their results, and known failures or limitations. Label expectations and untested claims clearly.
-- Screenshots and measurements must come from the submitted implementation. For measurements, include the method and conditions; retain failures that affect the interpretation rather than presenting only favorable evidence.
+- Include screenshots of the running result whenever you can; they feed the site's comparison view and let readers assess the output without running it. Screenshots and measurements must come from the submitted implementation. For measurements, include the method and conditions; retain failures that affect the interpretation rather than presenting only favorable evidence.
+
+### Keep the site preview runnable
+
+The site copies `app/` — or the directory named in `preview.json` — verbatim into the published previews; it does not run a build. The entry page is served inside a sandboxed iframe with an opaque origin. For the preview link to work:
+
+- Reference assets with relative paths (`./bundle.js`, not `/src/main.js`).
+- Ship a classic script bundle. Module scripts need CORS headers the static host does not send, and bare imports such as `import "three"` have no bundler to resolve them.
+- If the submitted form needs a build step, keep the source in `app/` and commit the built output alongside, with `preview.json` pointing at it, e.g. `{ "directory": "dist", "entry": "index.html" }`.
+- Check the result from a plain static server, not only through a dev server.
+
+When `app/index.html` exists it is published as the preview whether or not it can run; there is no opt-out.
 
 ## Report a problem
 
