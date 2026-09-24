@@ -1,0 +1,7 @@
+{
+  "type": "music",
+  "audio": "app/seaside_stroll.mp3",
+  "midi": "app/seaside_stroll.mid",
+  "source": ["app/compose_seaside.py"],
+  "rendering": "NumPy synthesis inside compose_seaside.py: additive melodic instruments and filtered-noise percussion per GM part, constant-power panning, FFT-convolution hall (synthetic decaying-noise impulse response), quiet low-passed surf ambience; deterministic seed 20260924; encoded with ffmpeg 8.1.2 libmp3lame -q:a 2, 44.1 kHz stereo."
+}
